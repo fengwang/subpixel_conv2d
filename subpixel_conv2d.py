@@ -49,11 +49,18 @@ class SubpixelConv2D(Layer):
 
     def compute_output_shape(self, input_shape):
         factor = self.upsampling_factor * self.upsampling_factor
-        return ( input_shape[0],
-                input_shape[1] * self.upsampling_factor,
-                input_shape[2] * self.upsampling_factor,
-                int(input_shape[3] / factor )
-               )
+        input_shape_1 = None
+        if input_shape[1] is not None:
+            input_shape_1 = input_shape[1] * self.upsampling_factor
+        input_shape_2 = None
+        if input_shape[2] is not None:
+            input_shape_2 = input_shape[2] * self.upsampling_factor
+        dims = [ input_shape[0],
+                 input_shape_1,
+                 input_shape_2,
+                 int(input_shape[3]/factor)
+               ]
+        return tuple( dims )
 
 get_custom_objects().update({'SubpixelConv2D': SubpixelConv2D})
 
