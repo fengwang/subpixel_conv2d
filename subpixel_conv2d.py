@@ -1,4 +1,4 @@
-from keras.engine import Layer, InputSpec
+from keras.engine import Layer
 import tensorflow as tf
 
 from keras.utils.generic_utils import get_custom_objects
