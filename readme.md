@@ -10,8 +10,8 @@ A simple model upsampling a layer of dimension ( 32, 32, 16 ) to ( 128, 128, 1 )
 
 ```python
 from subpixel_conv2d import SubpixelConv2D
-from keras.layers import Input
-from keras.models import Model, load_model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Model, load_model
 ip = Input(shape=(32, 32, 16))
 x = SubpixelConv2D(upsampling_factor=4)(ip)
 model = Model(ip, x)
@@ -46,7 +46,7 @@ new model loaded successfully
 
 ### Note
 
-Before loading a model designed with `SubpixelConv2D`, do load `from subpixel_conv2d import SubpixelConv2D`.
+Before loading a model designed with `SubpixelConv2D`, make sure `from subpixel_conv2d import SubpixelConv2D` has been executed.
 
 ### Reference
 

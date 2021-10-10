@@ -1,7 +1,6 @@
-from keras.engine import Layer
-import tensorflow as tf
-
-from keras.utils.generic_utils import get_custom_objects
+from tensorflow.keras.layers import Layer
+from tensorflow.keras.utils import get_custom_objects
+from tensorflow.nn import depth_to_space
 
 class SubpixelConv2D(Layer):
     """ Subpixel Conv2D Layer
@@ -40,7 +39,7 @@ class SubpixelConv2D(Layer):
                              str(factor) + '.')
 
     def call(self, inputs, **kwargs):
-        return tf.depth_to_space( inputs, self.upsampling_factor )
+        return depth_to_space( inputs, self.upsampling_factor )
 
     def get_config(self):
         config = { 'upsampling_factor': self.upsampling_factor, }
@@ -65,8 +64,8 @@ class SubpixelConv2D(Layer):
 get_custom_objects().update({'SubpixelConv2D': SubpixelConv2D})
 
 if __name__ == '__main__':
-    from keras.layers import Input
-    from keras.models import Model, load_model
+    from tensorflow.keras.layers import Input
+    from tensorflow.keras.models import Model, load_model
     ip = Input(shape=(32, 32, 16))
     x = SubpixelConv2D(upsampling_factor=4)(ip)
     model = Model(ip, x)
